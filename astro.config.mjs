@@ -5,6 +5,6 @@ import react from "@astrojs/react"
 // https://astro.build/config
 export default defineConfig({
   site: "https://TheLaucha.github.io",
-  base: "/Astro-web",
+  base: "/",
   integrations: [react()],
 })
