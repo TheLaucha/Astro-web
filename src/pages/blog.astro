@@ -1,0 +1,23 @@
+---
+import type { Code, Debug } from "astro:components";
+import PostPreview from "../components/PostPreview.astro";
+import LayoutPost from "../layouts/LayoutPost.astro";
+import Title from "../components/Title.astro";
+
+
+
+const posts = await Astro.glob('./posts/*.md')
+---
+
+<LayoutPost title="Blog" frontmatter?>
+  <section>
+    <Title title="Ultimas noticias"></Title>
+    {
+      posts.map(post => {
+        return(
+          <PostPreview post={post}></PostPreview>
+        )
+      })
+    }
+  </section>
+</LayoutPost>

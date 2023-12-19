@@ -1,0 +1,54 @@
+---
+import MenuItemContainerView from '../components/MenuItemContainerView.astro';
+import MenuItemView from '../components/MenuItemView.astro';
+import menuItems from '../data/menuItemsData'
+interface Props {
+	title: string;
+}
+
+console.log('Carga el layout')
+console.log(menuItems)
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<MenuItemContainerView>
+			{menuItems.map(item => {
+				return (
+					<MenuItemView title={item.title} url={item.url}></MenuItemView>	
+				)
+			})}
+		</MenuItemContainerView>
+		<slot />
+	</body>
+</html>
+<style is:global>
+	html{
+		background-color: black;
+	}
+	body{
+		margin: 0;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>

@@ -1,0 +1,86 @@
+---
+import MenuItemContainerView from '../components/MenuItemContainerView.astro';
+import MenuItemView from '../components/MenuItemView.astro';
+import menuItems from '../data/menuItemsData'
+interface Props {
+	title: string;
+  frontmatter?: any
+}
+
+console.log('Carga el layout')
+console.log(menuItems)
+ 
+const { title, frontmatter } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{frontmatter?.title ?? title}</title>
+	</head>
+	<body>
+		<MenuItemContainerView>
+			{menuItems.map(item => {
+				return (
+					<MenuItemView title={item.title} url={item.url}></MenuItemView>	
+				)
+			})}
+		</MenuItemContainerView>
+    <div class="container">
+      <div class="logo">
+        <img src="/assets/hero-logo.webp" width="400px" alt="">
+      </div>
+      <slot />
+    </div>
+	</body>
+</html>
+<style is:global>
+  html{
+    background-color: #181e1e;
+	}
+	body{
+		margin: 0;
+    background-image: url(/assets/bg.webp);
+    min-height: 100vh;
+    color: white;
+    font-size: 18px;
+    background-repeat: no-repeat;
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+	.container{
+    margin-top: 120px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    color: white;
+  }
+  .logo{
+    text-align: center;
+    position: relative;
+    top: -100px;
+    margin-bottom: -50px;
+  }
+  .container a{
+    color: #c56c23;
+  }
+  img{
+    max-width: 100%;
+  }
+</style>
